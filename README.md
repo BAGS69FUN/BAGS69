@@ -207,8 +207,3 @@ MIT License - see [LICENSE](LICENSE) for details.
 </div>
 
 ---
-
-## 📸 Logo Setup
-
-Replace `public/bags.gif` with your own logo. The current file is a placeholder.
-Recommended: Keep the file under 500KB for faster page loads.
