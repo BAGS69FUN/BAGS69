@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: launch-on-bags
+    env: node
+    plan: starter
+    buildCommand: |
+      corepack enable
+      corepack prepare pnpm@latest --activate
+      pnpm install --frozen-lockfile=false
+      pnpm build
+    startCommand: pnpm start
+    autoDeploy: true
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: NEXT_PUBLIC_CLUSTER
+        value: mainnet-beta
+      - key: DATABASE_PATH
+        value: /data/launch_on_bags.json
+      - key: NEXT_PUBLIC_SOLANA_RPC_URL
+        sync: false
+      - key: SOLANA_RPC_URL
+        sync: false
+      - key: BAGS_API_KEY
+        sync: false
+      - key: NEXT_PUBLIC_PARTNER_CONFIG_KEY
+        value: CcBd9g98VKcbfHke7FzQNPypAUZg7waDJ1VXTPzEvY5C

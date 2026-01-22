@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation - BAGS69 $69</title>
+  <link rel="icon" href="/bags.gif" type="image/gif">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #050505;
+      --bg-card: #0a0a0a;
+      --border: #1a1a1a;
+      --green: #00ff88;
+      --green-dim: rgba(0, 255, 136, 0.1);
+      --text: #ffffff;
+      --text-dim: #888888;
+      --purple: #a855f7;
+      --orange: #f7931a;
+      --pink: #ff6b9d;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .page { min-height: 100vh; display: flex; flex-direction: column; }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .logo img { width: 36px; height: 36px; border-radius: 8px; }
+    .logo-text { font-size: 15px; font-weight: 700; }
+    .logo-text span { color: var(--green); }
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .back-btn:hover { border-color: var(--green); color: var(--green); }
+    
+    .content {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+    .page-title {
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--text) 0%, var(--green) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .page-subtitle {
+      font-size: 18px;
+      color: var(--text-dim);
+      margin-bottom: 48px;
+    }
+    .section { margin-bottom: 48px; }
+    .section-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title .emoji { font-size: 28px; }
+    .section p { color: var(--text-dim); margin-bottom: 16px; font-size: 15px; }
+    .section strong { color: var(--text); }
+    .section a { color: var(--green); }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s;
+    }
+    .feature-card:hover { border-color: var(--green); transform: translateY(-2px); }
+    .feature-icon { font-size: 32px; margin-bottom: 12px; }
+    .feature-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .feature-desc { font-size: 13px; color: var(--text-dim); }
+    
+    .highlight-box {
+      background: var(--green-dim);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+    .highlight-box strong { color: var(--green); }
+    
+    .warning-box {
+      background: rgba(255, 193, 7, 0.1);
+      border: 1px solid rgba(255, 193, 7, 0.3);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+    .warning-box strong { color: #ffc107; }
+    
+    .steps { margin-top: 24px; }
+    .step { display: flex; gap: 16px; margin-bottom: 24px; }
+    .step-number {
+      width: 36px;
+      height: 36px;
+      background: var(--green);
+      color: #000;
+      font-size: 14px;
+      font-weight: 800;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-content h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .step-content p { font-size: 14px; color: var(--text-dim); margin: 0; }
+    
+    .pages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .page-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    .page-card:hover { border-color: var(--green); background: rgba(255,255,255,0.02); }
+    .page-card-icon { font-size: 24px; }
+    .page-card-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .page-card-info p { font-size: 11px; color: var(--text-dim); margin: 0; }
+    
+    code {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--green);
+    }
+    
+    .fee-breakdown {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 20px 0;
+    }
+    .fee-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .fee-row:last-child { border-bottom: none; }
+    .fee-label { color: var(--text-dim); }
+    .fee-value { font-weight: 700; color: var(--green); }
+    
+    .example-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .example-title { font-weight: 700; margin-bottom: 12px; color: var(--orange); }
+    .example-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; }
+    .example-row span:first-child { color: var(--text-dim); }
+    .example-row span:last-child { color: var(--text); }
+    .example-total { border-top: 1px solid var(--border); margin-top: 8px; padding-top: 12px; }
+    .example-total span:last-child { color: var(--green); font-weight: 700; }
+    
+    .footer {
+      padding: 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    .footer a { color: var(--green); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+    
+    @media (max-width: 768px) {
+      .content { padding: 32px 16px; }
+      .page-title { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <a href="/" class="logo">
+        <img src="/bags.gif" alt="BAGS69">
+        <span class="logo-text">BAGS69 <span>$69</span></span>
+      </a>
+      <a href="/" class="back-btn">← Back to App</a>
+    </header>
+    
+    <main class="content">
+      <h1 class="page-title">Documentation</h1>
+      <p class="page-subtitle">Everything you need to know about BAGS69 Fair Launch Presales</p>
+      
+      <!-- What is BAGS69 -->
+      <section class="section">
+        <h2 class="section-title"><span class="emoji">🚀</span> What is BAGS69?</h2>
+        <p>
+          <strong>BAGS69</strong> is a fair launch presale platform built on <a href="https://bags.fm" target="_blank">BAGS.FM</a>. 
+          It allows anyone to create token presales where the creator and up to <strong>68 participants</strong> contribute SOL and automatically receive trading fee shares forever.
+        </p>
+        <p>
+          Unlike traditional presales, BAGS69 uses a <strong>weighted fee-sharing model</strong> - all participants earn trading fees proportional to their SOL contribution, creating aligned incentives between creators and supporters.
+        </p>
+        
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-title">Up to 68 Participants</div>
+            <div class="feature-desc">Creator + up to 68 wallets can join. The more participants, the more decentralized the fee distribution.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-title">Auto Launch</div>
+            <div class="feature-desc">Token launches automatically when presale fills. No manual intervention needed.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <div class="feature-title">Weighted Fee Sharing</div>
+            <div class="feature-desc">Creator gets 5% of fees. Remaining 95% split by SOL contribution weight.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-title">Safe Refunds</div>
+            <div class="feature-desc">If presale doesn't fill in time, participants get full refund (no tax).</div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Fee Structure -->
+      <section class="section">
+        <h2 class="section-title"><span class="emoji">💎</span> Fee Structure</h2>
+        <p>
+          BAGS69 uses a transparent <strong>weighted fee-sharing model</strong> that rewards contributors proportionally to their SOL investment:
+        </p>
+        
+        <div class="fee-breakdown">
+          <div class="fee-row">
+            <span class="fee-label">Creator Fee Share (Deployer)</span>
+            <span class="fee-value">5% of trading fees</span>
+          </div>
+          <div class="fee-row">
+            <span class="fee-label">Participants Fee Share</span>
+            <span class="fee-value">95% (weighted by SOL contribution)</span>
+          </div>
+          <div class="fee-row">
+            <span class="fee-label">Max Participants</span>
+            <span class="fee-value">68 wallets</span>
+          </div>
+          <div class="fee-row">
+            <span class="fee-label">Launch Fee (Creator)</span>
+            <span class="fee-value">0.045 SOL (non-refundable)</span>
+          </div>
+          <div class="fee-row">
+            <span class="fee-label">Min Contribution</span>
+            <span class="fee-value">0.01 SOL</span>
+          </div>
+          <div class="fee-row">
+            <span class="fee-label">Max Contribution</span>
+            <span class="fee-value">0.1 SOL</span>
+          </div>
+        </div>
+        
+        <div class="highlight-box">
+          <strong>Weighted Distribution:</strong> Your share of the 95% participant pool is based on how much SOL you contributed relative to the total. Contribute more = earn more fees!
+        </div>
+
+        <div class="example-box">
+          <div class="example-title">📊 Example Fee Distribution</div>
+          <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 16px;">Token generates <strong style="color: var(--text);">1 SOL</strong> in trading fees. Total presale raised: 0.5 SOL</p>
+          
+          <div class="example-row">
+            <span>Creator (deployer)</span>
+            <span>5% → 0.05 SOL</span>
+          </div>
+          <div class="example-row">
+            <span>Participant A (contributed 0.1 SOL = 20%)</span>
+            <span>19% → 0.19 SOL</span>
+          </div>
+          <div class="example-row">
+            <span>Participant B (contributed 0.05 SOL = 10%)</span>
+            <span>9.5% → 0.095 SOL</span>
+          </div>
+          <div class="example-row">
+            <span>Other participants (70% of pool)</span>
+            <span>66.5% → 0.665 SOL</span>
+          </div>
+          <div class="example-row example-total">
+            <span>Total distributed</span>
+            <span>1.0 SOL</span>
+          </div>
+        </div>
+      </section>
+      
+      <!-- How to Create Presale -->
+      <section class="section">
+        <h2 class="section-title"><span class="emoji">📝</span> How to Create a Presale</h2>
+        <p>Creating a presale on BAGS69 is simple:</p>
+        
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Connect Wallet & Pay Fee</h4>
+              <p>Connect your Solana wallet and pay the 0.045 SOL launch fee (non-refundable). This makes you the deployer with 5% fee share.</p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Configure Token</h4>
+              <p>Enter token name, symbol, description, and upload an image. Add Twitter/website if you have them.</p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Set Participant Count</h4>
+              <p>Choose between 1-68 participant slots. Each participant can contribute 0.01-0.1 SOL.</p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Wait for Participants</h4>
+              <p>Share your presale link. Once all slots fill, the token auto-launches on BAGS.FM!</p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h4>Claim Fees Forever</h4>
+              <p>Visit the Claim Fees page anytime to collect your accumulated trading fee rewards.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="warning-box">
+          <strong>⚠️ Note:</strong> The 0.045 SOL launch fee is non-refundable even if the presale fails to fill. Participant contributions are fully refunded if the presale expires.
+        </div>
+      </section>
+
+      <!-- How Fee Claiming Works -->
+      <section class="section">
+        <h2 class="section-title"><span class="emoji">💸</span> How Fee Claiming Works</h2>
+        <p>
+          Once your token launches, trading fees accumulate automatically. Here's how to claim:
+        </p>
+        
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Go to Claim Fees Page</h4>
+              <p>Connect your wallet and navigate to the Claim Fees page.</p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>View Your Positions</h4>
+              <p>See all tokens you've participated in and your claimable SOL for each.</p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Click Claim</h4>
+              <p>Sign the transaction to claim your fees. They'll be sent directly to your wallet!</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="highlight-box">
+          <strong>💡 Tip:</strong> Fees accumulate over time from trading activity. Check back periodically to claim your rewards!
+        </div>
+      </section>
+      
+      <!-- Platform Pages -->
+      <section class="section">
+        <h2 class="section-title"><span class="emoji">📱</span> Platform Pages</h2>
+        
+        <div class="pages-grid">
+          <a href="/" class="page-card">
+            <div class="page-card-icon">🏠</div>
+            <div class="page-card-info">
+              <h4>Home</h4>
+              <p>Platform overview & stats</p>
+            </div>
+          </a>
+          
+          <a href="/presales" class="page-card">
+            <div class="page-card-icon">📋</div>
+            <div class="page-card-info">
+              <h4>Presales</h4>
+              <p>Browse all presales</p>
+            </div>
+          </a>
+          
+          <a href="/launched" class="page-card">
+            <div class="page-card-icon">🚀</div>
+            <div class="page-card-info">
+              <h4>Launched</h4>
+              <p>Successfully launched tokens</p>
+            </div>
+          </a>
+          
+          <a href="/claim" class="page-card">
+            <div class="page-card-icon">💰</div>
+            <div class="page-card-info">
+              <h4>Claim Fees</h4>
+              <p>Claim your fee rewards</p>
+            </div>
+          </a>
+          
+          <a href="/presale/create" class="page-card">
+            <div class="page-card-icon">✨</div>
+            <div class="page-card-info">
+              <h4>Create</h4>
+              <p>Launch your own presale</p>
+            </div>
+          </a>
+        </div>
+      </section>
+      
+      <!-- $69 Token -->
+      <section class="section">
+        <h2 class="section-title"><span class="emoji">🪙</span> $69 Token</h2>
+        <p>
+          The <strong>$69</strong> token is the native token of the BAGS69 ecosystem.
+        </p>
+        <p>
+          Contract Address: <code>69FuNyPbdP3xezLyMFzBrnWMMCisKThNgUevXhBAGS69</code>
+        </p>
+        <p>
+          Trade $69 on <a href="https://bags.fm/69FuNyPbdP3xezLyMFzBrnWMMCisKThNgUevXhBAGS69" target="_blank">BAGS.FM</a> or <a href="https://jup.ag/swap?outputMint=69FuNyPbdP3xezLyMFzBrnWMMCisKThNgUevXhBAGS69&inputMint=So11111111111111111111111111111111111111112" target="_blank">Jupiter</a>.
+        </p>
+      </section>
+      
+      <!-- FAQ -->
+      <section class="section">
+        <h2 class="section-title"><span class="emoji">❓</span> FAQ</h2>
+        
+        <div class="feature-card" style="margin-bottom: 12px;">
+          <div class="feature-title">What happens if the presale doesn't fill?</div>
+          <div class="feature-desc">All participant contributions are fully refunded. Only the creator's 0.045 SOL launch fee is non-refundable.</div>
+        </div>
+        
+        <div class="feature-card" style="margin-bottom: 12px;">
+          <div class="feature-title">How are fees calculated?</div>
+          <div class="feature-desc">Creator gets 5% of all trading fees. The remaining 95% is distributed to participants based on their SOL contribution weight.</div>
+        </div>
+        
+        <div class="feature-card" style="margin-bottom: 12px;">
+          <div class="feature-title">Can I contribute multiple times?</div>
+          <div class="feature-desc">Each wallet can only join once per presale, contributing between 0.01-0.1 SOL.</div>
+        </div>
+        
+        <div class="feature-card" style="margin-bottom: 12px;">
+          <div class="feature-title">When can I claim fees?</div>
+          <div class="feature-desc">Anytime after the token launches! Fees accumulate from trading activity and can be claimed whenever you want.</div>
+        </div>
+      </section>
+      
+      <!-- Resources -->
+      <section class="section">
+        <h2 class="section-title"><span class="emoji">📚</span> Resources</h2>
+        <ul style="margin-left: 20px; color: var(--text-dim);">
+          <li style="margin-bottom: 8px;"><a href="https://bags.fm" target="_blank">BAGS.FM Platform</a></li>
+          <li style="margin-bottom: 8px;"><a href="https://docs.bags.fm" target="_blank">BAGS API Documentation</a></li>
+          <li style="margin-bottom: 8px;"><a href="https://x.com/bags69fun" target="_blank">Follow us on X</a></li>
+        </ul>
+      </section>
+    </main>
+    
+    <footer class="footer">
+      <p>© 2025 BAGS69 — Powered by <a href="https://bags.fm" target="_blank">BAGS.FM</a></p>
+    </footer>
+  </div>
+</body>
+</html>
